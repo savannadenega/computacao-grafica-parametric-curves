@@ -22,7 +22,8 @@ void scaleCurvePoints(std::vector<glm::vec3*>* points, float factor);
 float calculateAngle(int indexA, int indexB);
 
 int textureNum = 0;
-float scaleFactor = 45.0f;
+//Tamanho da curva
+float scaleFactor = 20.0f;
 
 std::vector<glm::vec3*>* curvePoints = new std::vector<glm::vec3*>();
 std::vector<glm::vec3*>* scaledCurvePoints = new std::vector<glm::vec3*>();
@@ -31,7 +32,7 @@ std::vector<glm::vec3*>* scaledCurvePoints = new std::vector<glm::vec3*>();
 const GLint WIDTH = 1000, HEIGHT = 800;
 
 // camera
-Camera camera(glm::vec3(0.0f, 0.0f, 3.0f));
+Camera camera(glm::vec3(0.0f, 10.0f, 30.0f));
 float lastX = WIDTH / 2.0f;
 float lastY = HEIGHT / 2.0f;
 bool firstMouse = true;
@@ -83,7 +84,7 @@ int main() {
 	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 
 	glDepthFunc(GL_LESS);
-	
+
 	Shader *coreShader = new Shader("Shaders/Core/core.vert", "Shaders/Core/core.frag");
 	coreShader->Use();
 
@@ -91,7 +92,7 @@ int main() {
 	scaleCurvePoints(curvePoints, scaleFactor);
 
 	std::vector<Mesh*>* meshVec = new std::vector<Mesh*>();
-	std::string objs = "mesa01.obj curve.obj end";
+	std::string objs = "bmw.obj curve.obj end";
 	istringstream ss(objs);
 	string temp;
 	ss >> temp;
@@ -138,7 +139,7 @@ int main() {
 
 	glm::mat4 projection(1);
 	projection = glm::perspective(glm::radians(camera.Zoom), (float)WIDTH / (float)HEIGHT, 0.1f, 100.0f);
-	
+
 	float angle = 0.0f;
 	int movementIndex = 0;
 
@@ -166,13 +167,13 @@ int main() {
 		GLint modelLoc = glGetUniformLocation(coreShader->program, "model");
 		GLint viewLoc = glGetUniformLocation(coreShader->program, "view");
 		GLint projLoc = glGetUniformLocation(coreShader->program, "projection");
-		
+
 		coreShader->Use();
 
 		glUniformMatrix4fv(modelLoc, 1, GL_FALSE, glm::value_ptr(model));
 		glUniformMatrix4fv(viewLoc, 1, GL_FALSE, glm::value_ptr(view));
 		glUniformMatrix4fv(projLoc, 1, GL_FALSE, glm::value_ptr(projection));
-				
+
 		std::vector<Group*>* currentGroups = nullptr;
 
 		//iterate through the different meshes
@@ -200,7 +201,7 @@ int main() {
 						else {
 							glm::mat4 transform = glm::translate(model, glm::vec3(curvePoints->at(movementIndex)->x, curvePoints->at(movementIndex)->y, curvePoints->at(movementIndex)->z));
 							angle = -calculateAngle(movementIndex, movementIndex + 5);
-							angle += 1.5708f; // Add 90º to fix initial direction from the motocycle							
+							angle += 6.2; // Add 90º to fix initial direction from the motocycle							
 							transform = glm::rotate(transform, angle, glm::vec3(0, 1, 0));
 							glUniformMatrix4fv(modelLoc, 1, GL_FALSE, glm::value_ptr(transform));
 						}
@@ -211,11 +212,11 @@ int main() {
 			}
 		}
 		movementIndex += 1;
-		if (curvePoints->size() -5 == movementIndex)
+		if (curvePoints->size() - 5 == movementIndex)
 			movementIndex = 0;
 		glfwSwapBuffers(window);
 	}
-	coreShader->Delete();	
+	coreShader->Delete();
 	glfwTerminate();
 	return EXIT_SUCCESS;
 }
@@ -325,7 +326,7 @@ void readCurvePoints(const GLchar* path) {
 }
 
 float calculateAngle(int indexA, int indexB) {
-	
+
 	glm::vec3* a = curvePoints->at(indexA);
 	glm::vec3* b;
 
