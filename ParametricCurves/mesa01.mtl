@@ -1,0 +1,12 @@
+newmtl lambert2SG
+illum 4
+
+Kd 0.50 0.50 0.50 //diffuse
+Ka 0.15 0.15 0.15  //ambient
+Tf 1.00 1.00 1.00 
+
+map_Kd mesa01.jpg
+Ni 1.00
+Ks 1.00 1.00 1.00 //spectular
+Ns 6 //usar esses 4?
+
