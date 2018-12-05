@@ -17,15 +17,15 @@ void framebuffer_size_callback(GLFWwindow* window, int width, int height);
 void mouse_callback(GLFWwindow* window, double xpos, double ypos);
 void scroll_callback(GLFWwindow* window, double xoffset, double yoffset);
 void processInput(GLFWwindow *window);
-void readCurvePoints(const GLchar* path);
-void scaleCurvePoints(std::vector<glm::vec3*>* points, float factor);
-float calculateAngle(int indexA, int indexB);
+void lerArqCurva(const GLchar* path);
+void ajustarTamanhoCurva(std::vector<glm::vec3*>* points, float factor);
+float calcularAnguloOBJ(int indexA, int indexB);
 
 int textureNum = 0;
 //Tamanho da curva
-float scaleFactor = 20.0f;
+float tamanhoCurva = 20.0f;
 
-std::vector<glm::vec3*>* curvePoints = new std::vector<glm::vec3*>();
+std::vector<glm::vec3*>* pontosCurva = new std::vector<glm::vec3*>();
 std::vector<glm::vec3*>* scaledCurvePoints = new std::vector<glm::vec3*>();
 
 //screen
@@ -88,8 +88,8 @@ int main() {
 	Shader *coreShader = new Shader("Shaders/Core/core.vert", "Shaders/Core/core.frag");
 	coreShader->Use();
 
-	readCurvePoints("originalCurve.txt");
-	scaleCurvePoints(curvePoints, scaleFactor);
+	lerArqCurva("originalCurve.txt");
+	ajustarTamanhoCurva(pontosCurva, tamanhoCurva);
 
 	std::vector<Mesh*>* meshVec = new std::vector<Mesh*>();
 	std::string objs = "bmw.obj curve.obj end";
@@ -195,12 +195,12 @@ int main() {
 							glBindTexture(GL_TEXTURE_2D, textureId);
 						}
 						if ((*group)->GetName() == " road") {
-							glm::mat4 transform = glm::scale(model, glm::vec3(scaleFactor));
+							glm::mat4 transform = glm::scale(model, glm::vec3(tamanhoCurva));
 							glUniformMatrix4fv(modelLoc, 1, GL_FALSE, glm::value_ptr(transform));
 						}
 						else {
-							glm::mat4 transform = glm::translate(model, glm::vec3(curvePoints->at(movementIndex)->x, curvePoints->at(movementIndex)->y, curvePoints->at(movementIndex)->z));
-							angle = -calculateAngle(movementIndex, movementIndex + 5);
+							glm::mat4 transform = glm::translate(model, glm::vec3(pontosCurva->at(movementIndex)->x, pontosCurva->at(movementIndex)->y, pontosCurva->at(movementIndex)->z));
+							angle = -calcularAnguloOBJ(movementIndex, movementIndex + 5);
 							angle += 6.2; // Add 90º to fix initial direction from the motocycle							
 							transform = glm::rotate(transform, angle, glm::vec3(0, 1, 0));
 							glUniformMatrix4fv(modelLoc, 1, GL_FALSE, glm::value_ptr(transform));
@@ -212,7 +212,7 @@ int main() {
 			}
 		}
 		movementIndex += 1;
-		if (curvePoints->size() - 5 == movementIndex)
+		if (pontosCurva->size() - 5 == movementIndex)
 			movementIndex = 0;
 		glfwSwapBuffers(window);
 	}
@@ -274,14 +274,14 @@ void scroll_callback(GLFWwindow* window, double xoffset, double yoffset)
 	camera.ProcessMouseScroll(yoffset);
 }
 
-void scaleCurvePoints(std::vector<glm::vec3*>* points, float factor) {
+void ajustarTamanhoCurva(std::vector<glm::vec3*>* points, float factor) {
 	for (int i = 0; i < points->size(); i++) {
 		scaledCurvePoints->push_back(new glm::vec3(points->at(i)->x*factor, points->at(i)->y, points->at(i)->z*factor));
 	}
-	curvePoints = scaledCurvePoints;
+	pontosCurva = scaledCurvePoints;
 }
 
-void readCurvePoints(const GLchar* path) {
+void lerArqCurva(const GLchar* path) {
 
 	std::ifstream file;
 	file.exceptions(std::ifstream::badbit);
@@ -312,7 +312,7 @@ void readCurvePoints(const GLchar* path) {
 			if (temp == "v") {
 				float x, y, z;
 				sstream >> x >> y >> z;
-				curvePoints->push_back(new glm::vec3(x, y, z));
+				pontosCurva->push_back(new glm::vec3(x, y, z));
 			}
 			lineCounter++;
 		}
@@ -325,16 +325,16 @@ void readCurvePoints(const GLchar* path) {
 	}
 }
 
-float calculateAngle(int indexA, int indexB) {
+float calcularAnguloOBJ(int indexA, int indexB) {
 
-	glm::vec3* a = curvePoints->at(indexA);
+	glm::vec3* a = pontosCurva->at(indexA);
 	glm::vec3* b;
 
-	if (indexA == curvePoints->size() - 5) {
-		b = curvePoints->at(0);
+	if (indexA == pontosCurva->size() - 5) {
+		b = pontosCurva->at(0);
 	}
 	else {
-		b = curvePoints->at(indexB);
+		b = pontosCurva->at(indexB);
 	}
 
 	GLfloat dx = b->x - a->x;

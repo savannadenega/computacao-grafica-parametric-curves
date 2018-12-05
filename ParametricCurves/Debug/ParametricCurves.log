@@ -1,4 +1,5 @@
-﻿  main.cpp
+﻿  Group.cpp
+  main.cpp
 c:\users\pablo\projetos\cg - 20182\projeto-cg-parametric-curves-full\parametriccurves\objreader.h(101): warning C4244: '=': conversão de 'double' para 'float', possível perda de dados
 c:\users\pablo\projetos\cg - 20182\projeto-cg-parametric-curves-full\parametriccurves\objreader.h(230): warning C4101: 'e': variável local não referenciada
 c:\users\pablo\projetos\cg - 20182\projeto-cg-parametric-curves-full\parametriccurves\main.cpp(147): warning C4244: 'inicializando': conversão de 'double' para 'GLfloat', possível perda de dados
@@ -12,4 +13,30 @@ c:\users\pablo\projetos\cg - 20182\projeto-cg-parametric-curves-full\parametricc
 c:\users\pablo\projetos\cg - 20182\projeto-cg-parametric-curves-full\parametriccurves\main.cpp(274): warning C4244: 'argumento': conversão de 'double' para 'float', possível perda de dados
 c:\users\pablo\projetos\cg - 20182\projeto-cg-parametric-curves-full\parametriccurves\main.cpp(278): warning C4018: '<': incompatibilidade de signed/unsigned
 c:\users\pablo\projetos\cg - 20182\projeto-cg-parametric-curves-full\parametriccurves\main.cpp(321): warning C4101: 'e': variável local não referenciada
+  Mesh.cpp
+c:\users\pablo\projetos\cg - 20182\projeto-cg-parametric-curves-full\parametriccurves\mesh.cpp(80): warning C4018: '<': incompatibilidade de signed/unsigned
+  Shader.cpp
+  Texture.cpp
+  Gerando Código...
+LINK : warning LNK4098: defaultlib 'LIBCMT' conflita com uso de outras bibliotecas; use /NODEFAULTLIB:library
+LINK : warning LNK4098: defaultlib 'MSVCRTD' conflita com uso de outras bibliotecas; use /NODEFAULTLIB:library
+Group.obj : warning LNK4049: símbolo definido localmente ___glewActiveTexture importado
+Group.obj : warning LNK4049: símbolo definido localmente ___glewBindBuffer importado
+Group.obj : warning LNK4049: símbolo definido localmente ___glewBufferData importado
+Group.obj : warning LNK4049: símbolo definido localmente ___glewGenBuffers importado
+Group.obj : warning LNK4049: símbolo definido localmente ___glewEnableVertexAttribArray importado
+Group.obj : warning LNK4049: símbolo definido localmente ___glewUniform1f importado
+Group.obj : warning LNK4049: símbolo definido localmente ___glewUniform1i importado
+Group.obj : warning LNK4049: símbolo definido localmente ___glewUniform3f importado
+Group.obj : warning LNK4049: símbolo definido localmente ___glewVertexAttribPointer importado
+Group.obj : warning LNK4049: símbolo definido localmente ___glewBindVertexArray importado
+Group.obj : warning LNK4049: símbolo definido localmente ___glewGenVertexArrays importado
+Shader.obj : warning LNK4049: símbolo definido localmente ___glewGetAttribLocation importado
+Shader.obj : warning LNK4049: símbolo definido localmente ___glewGetUniformLocation importado
+Texture.obj : warning LNK4049: símbolo definido localmente ___glewGenerateMipmap importado
+glew32s.lib(glew.obj) : warning LNK4099: PDB 'vc120.pdb' não foi encontrado 'glew32s.lib(glew.obj)' ou no 'C:\Users\pablo\Projetos\CG - 20182\projeto-cg-parametric-curves-full\Debug\vc120.pdb'; vinculando objeto quando quando sem nenhuma informação de depuração
+soil2-debug.lib(etc1_utils.obj) : warning LNK4099: PDB 'soil2-debug.pdb' não foi encontrado 'soil2-debug.lib(etc1_utils.obj)' ou no 'C:\Users\pablo\Projetos\CG - 20182\projeto-cg-parametric-curves-full\Debug\soil2-debug.pdb'; vinculando objeto quando quando sem nenhuma informação de depuração
+soil2-debug.lib(image_DXT.obj) : warning LNK4099: PDB 'soil2-debug.pdb' não foi encontrado 'soil2-debug.lib(image_DXT.obj)' ou no 'C:\Users\pablo\Projetos\CG - 20182\projeto-cg-parametric-curves-full\Debug\soil2-debug.pdb'; vinculando objeto quando quando sem nenhuma informação de depuração
+soil2-debug.lib(image_helper.obj) : warning LNK4099: PDB 'soil2-debug.pdb' não foi encontrado 'soil2-debug.lib(image_helper.obj)' ou no 'C:\Users\pablo\Projetos\CG - 20182\projeto-cg-parametric-curves-full\Debug\soil2-debug.pdb'; vinculando objeto quando quando sem nenhuma informação de depuração
+soil2-debug.lib(SOIL2.obj) : warning LNK4099: PDB 'soil2-debug.pdb' não foi encontrado 'soil2-debug.lib(SOIL2.obj)' ou no 'C:\Users\pablo\Projetos\CG - 20182\projeto-cg-parametric-curves-full\Debug\soil2-debug.pdb'; vinculando objeto quando quando sem nenhuma informação de depuração
   ParametricCurves.vcxproj -> C:\Users\pablo\Projetos\CG - 20182\projeto-cg-parametric-curves-full\Debug\ParametricCurves.exe
