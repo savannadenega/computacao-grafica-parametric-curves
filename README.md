@@ -5,7 +5,7 @@ Projeto de criação de movimentação de objetos 3D, som uso de sombras, para a
 ## Ferramentas:
 - Linguagem C;
 - Linguagem C ++;
-- Object-C;
+- Objective-C;
 - Software Visual Studio.
 
 ## Como executar:
